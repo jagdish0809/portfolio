@@ -46,10 +46,10 @@
     flex-direction: column;
 
     div {
-      width: 0;
-      height: 3px;
+      width: 5px;
+      height: 5px;
       background: transparent;
-      border-radius: 2px;
+      border-radius: 50%;
 
       margin-bottom: 5px;
     }
@@ -62,7 +62,7 @@
       text-transform: uppercase;
       font-weight: 500;
 
-      transition: all 0.5s ease-in-out;
+      transition: all 0.3s ease-in-out;
 
       &:hover {
         color: var(--secondary-color);
@@ -71,9 +71,7 @@
 
     &:hover {
       div {
-        width: 50%;
         background: var(--secondary-color);
-        transition: all 0.5s ease-in-out;
       }
     }
   }
