@@ -45,8 +45,7 @@ const Header = () => {
         transition={{ duration: 0.5, delayChildren: 0.5 }}
         className="app__header-img"
       >
-        <img src={images.round
-        } className="profile_pic" alt="profile_bg" />
+        <img src={images.round} className="profile_pic" alt="profile_bg" />
         <motion.img
           whileInView={{ scale: [0, 1] }}
           transition={{ duration: 1, ease: "easeInOut" }}
@@ -59,15 +58,32 @@ const Header = () => {
       <motion.div
         variant={scaleVariants}
         whileInView={scaleVariants.whileInView}
-        className="app__header-circles"
+        className="app__header-circles1"
       >
-        {[images.figma, images.python, images.react].map((circle, index)=>{
-            return(
-            <div className="circle-cmp app__flex" key={`circle-${index}`} >
+        {[images.figma, images.python, images.react].map(
+          (circle, index) => {
+            return (
+              <div className="circle-cmp app__flex" key={`circle-${index}`}>
                 <img src={circle} alt="circle" />
-            </div>
-            )
-        })}
+              </div>
+            );
+          }
+        )}
+      </motion.div>
+      <motion.div
+        variant={scaleVariants}
+        whileInView={scaleVariants.whileInView}
+        className="app__header-circles2"
+      >
+        {[images.html, images.css, images.javascript, images.sass].map(
+          (circle, index) => {
+            return (
+              <div className="circle-cmp app__flex" key={`circle-${index}`}>
+                <img src={circle} alt="circle" />
+              </div>
+            );
+          }
+        )}
       </motion.div>
     </div>
   );
