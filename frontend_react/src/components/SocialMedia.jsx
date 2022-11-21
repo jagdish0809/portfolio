@@ -7,7 +7,7 @@ const SocialMedia = () => {
   return (
     <div className="app__social">
       <div>
-        <AiFillGithub />
+        {/* <AiFillGithub /> */}
       </div>
       <div>
         <AiFillLinkedin />
