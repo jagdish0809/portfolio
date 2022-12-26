@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { AiFillEye, AiFillGithub } from "react-icons/ai";
+import { AiFillEye} from "react-icons/ai";
 import { motion } from "framer-motion";
 import { AppWrap } from "../../wrapper";
 import { urlFor, client } from "../../client";
 import "./Work.scss";
 
 const Work = () => {
-  const [animateCard, setAnimateCard] = useState([]);
-
-  const [activeFilter, setActiveFilter] = useState({ y: 0, opacity: 1 });
-
-  const handleWorkFilter = (item) => {};
   const [works, setWorks] = useState([]);
   const [filterWork, setFilterWork] = useState([]);
-
+  const [activeFilter, setActiveFilter] = useState('All');
+  const [animateCard, setAnimateCard] = useState({y:0, opacity: 1});
+  
   useEffect(() => {
     const query = `*[_type == "works" ]`;
 
@@ -23,13 +20,27 @@ const Work = () => {
     });
   }, []);
 
+  const handleWorkFilter = (item) => {
+    setActiveFilter(item);
+    setAnimateCard([{ y: 100, opacity: 0 }])
+    setTimeout(() => {
+      setAnimateCard([{ y: 100, opacity: 1 }]);
+      if (item === "All") {
+        setFilterWork(works);
+      } else {
+        setFilterWork(works.filter((work)=> work.tags.includes(item)))
+      }
+    }, 500);
+  };
+
+
   return (
     <React.Fragment>
       <h2 className="head-text" style={{ marginTop: 20 }}>
         My Creative <span>Portfolio</span> Section{" "}
       </h2>
       <div className="app__work-filter">
-        {["UI/UX", "Websites", "Mobile App", "React JS", "All"].map(
+        {["UI/UX", "Websites", "Mobile App", "React Js", "All"].map(
           (item, index) => (
             <div
               key={index}
@@ -61,7 +72,7 @@ const Work = () => {
                 }}
                 className="app__work-hover app__flex"
               >
-                <a href={work.projectLink} taget="_blank" rel="noreferrer">
+                <a href={work.projectLink} target="_blank" rel="noreferrer">
                   <motion.div
                     whileInView={{ scale: [0, 1] }}
                     whileHover={{ scale: [1, 0.9] }}
@@ -75,6 +86,15 @@ const Work = () => {
                 </a>
               </motion.div>
             </div>
+
+            <div className="app__work-content app__flex">
+              <h4 className="bold-text">{work.title}</h4>
+              <p className="p-text" style={{ marginTop: 10 }}>{work.description}</p>
+
+              <div className="app__work-tag app__flex">
+                <p className="p-text">{work.tags[0]}</p>
+              </div>
+            </div>
           </div>
         ))}
       </motion.div>
@@ -82,4 +102,4 @@ const Work = () => {
   );
 };
 
-export default Work;
+export default AppWrap(Work, 'work');
